@@ -36,7 +36,7 @@ if ($connect) {
             $upload_image = preg_replace('/\s+/', '_', $upload_image);
             $upload_image = preg_replace('/\.(?=.*\.)/', '_', $upload_image); //replace all dots with _ , except the last dot
 
-            $absoluteAddress = "https://lexeen.ir/kntu_project/assets/foods/" . $upload_image;
+            $absoluteAddress = "https://lexeenservice.stu-assist.ir/assets/foods/" . $upload_image;
             move_uploaded_file($_FILES["foodImage"]["tmp_name"], "../../../assets/foods/" . $upload_image);
             $insertImageQuery = "INSERT INTO Gallery(one) VALUES ('$absoluteAddress')";
             mysqli_query($connect, $insertImageQuery);
