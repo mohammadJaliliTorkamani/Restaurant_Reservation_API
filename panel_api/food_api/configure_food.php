@@ -25,7 +25,7 @@ if ($connect) {
     $submitToAdd = $_POST['submit_to_add']; //if be true means add,if false means delete
 
     $token = $_POST['Token'];
-    $userValidator = new UserValidat`or($token);
+    $userValidator = new UserValidator($token);
     if ($userValidator->isValidUser()) {
         $restaurantID = $userValidator->getRestaurantID();
 
