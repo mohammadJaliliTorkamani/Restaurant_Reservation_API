@@ -16,7 +16,7 @@ if ($connect) {
     foreach ($headers as $key => $val) {
         if (strcmp($key, "token") == 0)
             $token = $val;
-        else if (strcmp($key, "Code") == 0)
+        else if (strcmp($key, "code") == 0)
             $code = $val;
         else if (strcmp($key, "encsharedkey") == 0)
             $sharedKey = $val;
