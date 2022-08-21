@@ -11,7 +11,7 @@ if ($connect) {
     $x = $_GET["client_private_key"];
     $headers = getallheaders();
     foreach ($headers as $key => $val) {
-        if (strcmp($key, "Token") == 0) {
+        if (strcmp($key, "token") == 0) {
             $token = $val;
         }
     }

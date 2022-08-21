@@ -12,7 +12,7 @@ if ($connect) {
     $pusheID = null;
     $headers = getallheaders();
     foreach ($headers as $key => $val) {
-        if (strcmp($key, "Pusheid") == 0)
+        if (strcmp($key, "pusheid") == 0)
             $pusheID = $val;
     }
 

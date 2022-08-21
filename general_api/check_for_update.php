@@ -15,11 +15,11 @@ if ($connect) {
     $versionCode = -1;
     $headers = getallheaders();
     foreach ($headers as $key => $val) {
-        if (strcmp($key, "Token") == 0)
+        if (strcmp($key, "token") == 0)
             $token = $val;
-        else if (strcmp($key, "Encsharedkey") == 0)
+        else if (strcmp($key, "encsharedkey") == 0)
             $sharedKey = $val;
-        else if (strcmp($key, "Versioncode") == 0)
+        else if (strcmp($key, "versioncode") == 0)
             $versionCode = $val;
     }
 

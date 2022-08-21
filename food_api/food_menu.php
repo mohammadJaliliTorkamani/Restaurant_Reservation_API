@@ -17,11 +17,11 @@ if ($connect) {
     $headers = getallheaders();
 
     foreach ($headers as $key => $val) {
-        if (strcmp($key, "Token") == 0)
+        if (strcmp($key, "token") == 0)
             $tokenValue = $val;
-        if (strcmp($key, "Encsharedkey") == 0)
+        if (strcmp($key, "encsharedkey") == 0)
             $sharedKey = (int)$val;
-        if (strcmp($key, "Code") == 0)
+        if (strcmp($key, "code") == 0)
             $code = $val;
     }
 

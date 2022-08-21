@@ -15,8 +15,8 @@ if ($connect) {
     $sharedKey = null;
     $headers = getallheaders();
     foreach ($headers as $key => $val) {
-        if (strcmp($key, "Token") == 0) $token = $val;
-        else if (strcmp($key, "Endsharedkey") == 0) $sharedKey = $val;
+        if (strcmp($key, "token") == 0) $token = $val;
+        else if (strcmp($key, "endsharedkey") == 0) $sharedKey = $val;
     }
 
     $UserValidator = new UserValidator($token);

@@ -14,11 +14,11 @@ if ($connect) {
     $sharedKey = null;
     $headers = getallheaders();
     foreach ($headers as $key => $val) {
-        if (strcmp($key, "Token") == 0)
+        if (strcmp($key, "token") == 0)
             $token = $val;
-        if (strcmp($key, "Code") == 0)
+        if (strcmp($key, "code") == 0)
             $code = $val;
-        if (strcmp($key, "Encsharedkey") == 0)
+        if (strcmp($key, "encsharedkey") == 0)
             $sharedKey = $val;
     }
     $UserValidator = new UserValidator($token);
