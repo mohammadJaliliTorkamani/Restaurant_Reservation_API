@@ -1,5 +1,5 @@
 <?php
-require_once('../SMSSender.php');
+require_once('../sms_service.php');
 require_once('../PersianDate.php');
 define('HOSTNAME', 'localhost');
 define('USERNAME', 'lexeense_admin');
@@ -24,24 +24,35 @@ if ($connect) {
         $fResult = mysqli_fetch_assoc($res);
         $code = rand(10000, 99999);
         try {
+            date_default_timezone_set("Asia/Tehran");
+    
             // your sms.ir panel configuration
-            $APIKey = "4c389b80758bfba78bc4ac9d";
-            $SecretKey = "Mohammad_Kimia_1376_1377";
+            $APIKey = "30cc1df5415d4e2361c82a02";
+            $SecretKey = "KimiaMohammad_L95";
             $APIURL = "https://ws.sms.ir/";
+            $templateID = "69085";
+            $actCode = rand(10000, 99999);
             // message data
             $data = array(
                 "ParameterArray" => array(
-                    array("Parameter" => "VerificationCode", "ParameterValue" => $code)
+                    array(
+                        "Parameter" => "VerificationCode",
+                        "ParameterValue" => $code
+                    )
                 ),
-                "Mobile" => "0" . substr($phone, 4),
-                "TemplateId" => "18002"
+                "Mobile" => $phone,
+                "TemplateId" => $templateID
             );
-            $SmsIR_UltraFastSend = new SmsSender($APIKey, $SecretKey, $APIURL);
+    
+            $SmsIR_UltraFastSend = new SmsIR_UltraFastSend($APIKey, $SecretKey, $APIURL);
             $UltraFastSend = $SmsIR_UltraFastSend->ultraFastSend($data);
-        } catch (Exeption $e) {
+            // var_dump($UltraFastSend);
+        } catch (Exception $e) {
+            // echo 'Error UltraFastSend : '.$e->getMessage();
             $response['code'] = 102;
             $response['message'] = 'خطای فنی !';
         }
+        
         $dateTime = (new gregorian2jalali)->gregorian_to_jalali() . " " . date('H:i:s');
         $insertQuery = "INSERT INTO ActivationCode(phone,pusheID,activationCode,DateTime) VALUES('$phone','$pusheID','$code','$dateTime')";
         mysqli_query($connect, $insertQuery);
