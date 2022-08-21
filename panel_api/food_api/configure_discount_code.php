@@ -25,7 +25,8 @@ if ($connect) {
             $selectDiscountQuery = "SELECT * FROM Discount WHERE code = '$code' AND restaurant_id = '$restaurantID' AND is_valid='1'";
             $selectDiscounRes = mysqli_query($connect, $selectDiscountQuery);
             if (mysqli_num_rows($selectDiscounRes) == 0) {
-                mysqli_query($connect, "INSERT INTO Discount(code,percentage,max_usage,minimum_acceptable_price,restaurant_id,is_valid,creation_time) VALUES('$code','$percentage','$maxUsage','$minAcceptable','$restaurantID','1','$dateTime')");
+                $q = "INSERT INTO Discount(code,percentage,max_usage,minimum_acceptable_price,restaurant_id,is_valid,creation_time) VALUES('$code','$percentage','$maxUsage','$minAcceptable','$restaurantID','1','$dateTime')";
+                mysqli_query($connect, $q);
                 $response['resultCode'] = 200;
                 $response['message'] = "موفق";
             } else {
