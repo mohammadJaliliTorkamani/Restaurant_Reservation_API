@@ -2,11 +2,11 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_KNTU_Database');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_Main_DB');
 
-function getActiveForServeHours($connect,$restaurantID)
+function getActiveForServeHours($connect, $restaurantID)
 {
     $workingTimeQuery = "SELECT ServingTime.start_time,ServingTime.end_time FROM RelRestaurantServingTime,ServingTime WHERE ServingTime.id = RelRestaurantServingTime.serving_time_id AND RelRestaurantServingTime.restaurant_id = '$restaurantID'";
     $workingHourSentence = "ساعت سرویس دهی امروز رستوران ";
@@ -37,7 +37,6 @@ if ($connect) {
             $code = $val;
         else if (strcmp($key, "Encsharedkey") == 0)
             $sharedKey = $val;
-
     }
 
     $UserValidator = new UserValidator($token);
@@ -81,9 +80,9 @@ if ($connect) {
             }
         }
 
-//        $minFoodQuery = "SELECT MIN(price) as minimum FROM Food WHERE Food.food_to_eat = '1' AND  Food.restaurant_id = '$restaurantID' AND deleted = '0' AND valid_to_cook = '1'";
-//        $minFoodRes = mysqli_query($connect, $minFoodQuery);
-//        $mimimumPrice = mysqli_fetch_assoc($minFoodRes)['minimum'];
+        //        $minFoodQuery = "SELECT MIN(price) as minimum FROM Food WHERE Food.food_to_eat = '1' AND  Food.restaurant_id = '$restaurantID' AND deleted = '0' AND valid_to_cook = '1'";
+        //        $minFoodRes = mysqli_query($connect, $minFoodQuery);
+        //        $mimimumPrice = mysqli_fetch_assoc($minFoodRes)['minimum'];
         $ans = ($totalChairNumber - 3 <= $number) && ($number <= $totalChairNumber);
         $response['code'] = 102;
         if ($ans) {
@@ -105,7 +104,7 @@ if ($connect) {
                     $response['code'] = 101;
                 } else {
                     $response['code'] = 102;
-                    $response['message'] = $cipher->encrypt("رستوران در این ساعت قادر به ارایه خدمات نیست." . getActiveForServeHours($connect,$restaurantID));
+                    $response['message'] = $cipher->encrypt("رستوران در این ساعت قادر به ارایه خدمات نیست." . getActiveForServeHours($connect, $restaurantID));
                 }
             } else {
                 $response['code'] = 102;
@@ -116,7 +115,5 @@ if ($connect) {
             $response['message'] = $cipher->encrypt("عدم تناسب تعداد نفرات با میز های انتخاب شده");
         }
         die(json_encode($response));
-
     }
 }
-?>

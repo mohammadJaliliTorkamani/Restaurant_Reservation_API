@@ -4,9 +4,9 @@ date_default_timezone_set("Asia/Tehran");
 require_once('../UserValidator.php');
 require_once('../../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_AbanDatabase');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_adminDatabase');
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 
 if ($connect) {
@@ -18,10 +18,10 @@ if ($connect) {
     $calories = $_POST['calories'];
     $cookTime = $_POST['cook_time_minute'];
     $description = $_POST['description'];
-    $foodToEat= $_POST['food_to_eat'];
+    $foodToEat = $_POST['food_to_eat'];
     $price = $_POST['price'];
     $dateTime = (new gregorian2jalali)->gregorian_to_jalali() . " " . date('H:i:s');
-    
+
     $submitToAdd = $_POST['submit_to_add']; //if be true means add,if false means delete
 
     $token = $_POST['Token'];
@@ -30,12 +30,12 @@ if ($connect) {
         $restaurantID = $userValidator->getRestaurantID();
 
         if ($submitToAdd == "true") { //want to add such food
-            $upload_image = $dateTime."_".$token."_".$_FILES["foodImage"]["name"];
-            
-            $upload_image=str_ireplace(array(':','/','*','!','-','+'),'_', $upload_image);
-            $upload_image=preg_replace('/\s+/','_', $upload_image);
-            $upload_image=preg_replace('/\.(?=.*\.)/', '_', $upload_image); //replace all dots with _ , except the last dot
-            
+            $upload_image = $dateTime . "_" . $token . "_" . $_FILES["foodImage"]["name"];
+
+            $upload_image = str_ireplace(array(':', '/', '*', '!', '-', '+'), '_', $upload_image);
+            $upload_image = preg_replace('/\s+/', '_', $upload_image);
+            $upload_image = preg_replace('/\.(?=.*\.)/', '_', $upload_image); //replace all dots with _ , except the last dot
+
             $absoluteAddress = "https://lexeen.ir/kntu_project/assets/foods/" . $upload_image;
             move_uploaded_file($_FILES["foodImage"]["tmp_name"], "../../../assets/foods/" . $upload_image);
             $insertImageQuery = "INSERT INTO Gallery(one) VALUES ('$absoluteAddress')";
@@ -66,9 +66,7 @@ if ($connect) {
             }
         }
         die(json_encode($response));
-
     } else {
         die('Unauthorized !');
     }
 }
-?>

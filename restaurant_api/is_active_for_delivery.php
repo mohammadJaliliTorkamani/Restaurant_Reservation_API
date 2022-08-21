@@ -2,9 +2,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_KNTU_Database');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_Main_DB');
 date_default_timezone_set("Asia/Tehran");
 
 function getActiveForDeliveryHours($connect, $restaurantID)
@@ -74,4 +74,3 @@ if ($connect) {
         die(json_encode($response));
     }
 }
-?>

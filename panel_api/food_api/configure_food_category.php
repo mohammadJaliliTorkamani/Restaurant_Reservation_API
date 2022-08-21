@@ -3,9 +3,9 @@ header('Access-Control-Allow-Origin: *'); //allow everybody
 date_default_timezone_set("Asia/Tehran");
 require_once('../UserValidator.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_AbanDatabase');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_adminDatabase');
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 if ($connect) {
     $foodID = $_GET['food_id'];
@@ -41,7 +41,7 @@ if ($connect) {
                 $response['resultCode'] = 100;
                 $response['message'] = "چنین رابطه ای قبلا ثبت شده است";
             }
-        } else {//we wanna delete a relation
+        } else { //we wanna delete a relation
             $selectCategoryFoodQuery = "SELECT id FROM RelFoodCategory WHERE food_id = '$foodID' AND category_id = '$categoryID'";
             $selectCategoryFoodRes = mysqli_query($connect, $selectCategoryFoodQuery);
             if (mysqli_num_rows($selectCategoryFoodRes) > 0) {
@@ -72,4 +72,3 @@ if ($connect) {
         die('Unauthorized !');
     }
 }
-?>

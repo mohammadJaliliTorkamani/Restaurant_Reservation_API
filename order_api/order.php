@@ -3,9 +3,9 @@ require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 require_once('../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_KNTU_Database');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_Main_DB');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 mysqli_set_charset($connect, "utf8");
@@ -30,7 +30,7 @@ if ($connect) {
         $userID = $UserValidator->getUserID();
         $cypher = new MCrypt($sharedKey);
         $restaurantID = $cypher->getRestaurantID($code);
-        
+
         $data = json_decode(file_get_contents('php://input'), true);
         date_default_timezone_set("Asia/Tehran");
 
@@ -53,7 +53,7 @@ if ($connect) {
         $endShamsiDateTime = $endShamsiDate . " " . $endGregorianTime;
         $explodedDate = explode("/", explode(" ", $date)[0]);
         $explodedTime = explode(":", explode(" ", $date2)[1]);
-        $qrCodeIssueTrackingNo = hash('md4',$userID . "_LXN_" . $explodedDate[0] . $explodedDate[1] . $explodedDate[2] . $explodedTime[0] . $explodedTime[1].rand(1,400000000));
+        $qrCodeIssueTrackingNo = hash('md4', $userID . "_LXN_" . $explodedDate[0] . $explodedDate[1] . $explodedDate[2] . $explodedTime[0] . $explodedTime[1] . rand(1, 400000000));
         //calculating totalPrice AND then, insert new lexinOrder record
         $bills = $data['specifiedBills'];
         foreach ($bills as $bill) {
@@ -120,5 +120,3 @@ if ($connect) {
         die(json_encode($response));
     }
 }
-?>
-

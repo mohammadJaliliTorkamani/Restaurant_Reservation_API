@@ -3,9 +3,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_KNTU_Database');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_Main_DB');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 mysqli_set_charset($connect, "utf8");
@@ -36,7 +36,7 @@ if ($connect) {
         $orderRes = mysqli_query($connect, $query);
         while ($order = mysqli_fetch_assoc($orderRes)) {
             $theOrderID = $order['id'];
-            $toReturn1['id']=$theOrderID;
+            $toReturn1['id'] = $theOrderID;
             $addressFetcherQuery = "SELECT Address.latitude,Address.longitude FROM Address,Deliver WHERE Deliver.order_id = '$theOrderID' AND Deliver.destination_address_id = Address.id";
             $addressFetcherRes = mysqli_query($connect, $addressFetcherQuery);
             $addressFetcherFetchResult = mysqli_fetch_assoc($addressFetcherRes);
@@ -79,8 +79,5 @@ if ($connect) {
             array_push($orders, $toReturn2);
         }
         die(json_encode($orders));
-
     }
 }
-?>
-
