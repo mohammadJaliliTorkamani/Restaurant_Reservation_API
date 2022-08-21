@@ -1,4 +1,4 @@
-                            <?php
+<?php
 
 /**
  * UltraFastSend File Restful API PHP Sample Codes
@@ -7,10 +7,8 @@
  * 
  * @category  PHPSampleCodes
  * @package   SampleCodes
- * @author    Pejman Kheyri <pejmankheyri@gmail.com>
  * @copyright 2018 The Ide Pardazan (ipe.ir) PHP Group. All rights reserved.
  * @license   https://sms.ir/ ipe license
-
  * @version   IPE: 2.0
  * @link      https://sms.ir/ Documentation of sms.ir Restful API PHP Sample Codes.
  */
@@ -20,13 +18,12 @@
  * 
  * @category  PHPSampleCodesClass
  * @package   SampleCodesClass
- * @author    Pejman Kheyri <pejmankheyri@gmail.com>
+ 
  * @copyright 2018 The Ide Pardazan (ipe.ir) PHP Group. All rights reserved.
  * @license   https://sms.ir/ ipe license
  * @link      https://sms.ir/ Documentation of sms.ir 
  */
-
-class SmsSender
+class SmsIR_UltraFastSend
 {
 
     /**
@@ -34,7 +31,7 @@ class SmsSender
      *
      * @return string Indicates the Url
      */
-    protected function getAPIUltraFastSendUrl() 
+    protected function getAPIUltraFastSendUrl()
     {
         return "api/UltraFastSend";
     }
@@ -72,15 +69,14 @@ class SmsSender
      * 
      * @return string Indicates the sent sms result
      */
-    public function ultraFastSend($data) 
+    public function ultraFastSend($data)
     {
         $token = $this->_getToken($this->APIKey, $this->SecretKey);
         if ($token != false) {
             $postData = $data;
 
-            $url = $this->APIURL.$this->getAPIUltraFastSendUrl();
+            $url = $this->APIURL . $this->getAPIUltraFastSendUrl();
             $UltraFastSend = $this->_execute($postData, $url, $token);
-
             $object = json_decode($UltraFastSend);
 
             $result = false;
@@ -101,7 +97,6 @@ class SmsSender
      * @return string Indicates the token key
      */
     private function _getToken()
-
     {
         $postData = array(
             'UserApiKey' => $this->APIKey,
@@ -110,9 +105,11 @@ class SmsSender
         );
         $postString = json_encode($postData);
 
-        $ch = curl_init($this->APIURL.$this->getApiTokenUrl());
+        $ch = curl_init($this->APIURL . $this->getApiTokenUrl());
         curl_setopt(
-            $ch, CURLOPT_HTTPHEADER, array(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
                 'Content-Type: application/json'
             )
         );
@@ -128,13 +125,10 @@ class SmsSender
 
         $resp = false;
         $IsSuccessful = '';
-
         $TokenKey = '';
-
         if (is_object($response)) {
             $IsSuccessful = $response->IsSuccessful;
             if ($IsSuccessful == true) {
-
                 $TokenKey = $response->TokenKey;
                 $resp = $TokenKey;
             } else {
@@ -159,9 +153,11 @@ class SmsSender
 
         $ch = curl_init($url);
         curl_setopt(
-            $ch, CURLOPT_HTTPHEADER, array(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
                 'Content-Type: application/json',
-                'x-sms-ir-secure-token: '.$token
+                'x-sms-ir-secure-token: ' . $token
             )
         );
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -175,4 +171,3 @@ class SmsSender
         return $result;
     }
 }
-?> 
