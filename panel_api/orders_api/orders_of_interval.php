@@ -4,9 +4,9 @@ date_default_timezone_set("Asia/Tehran");
 require_once('../UserValidator.php');
 require_once('../../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_adminDatabase');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_AbanDatabase');
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 
 //is food bills must not be used because we wanna display only one item
@@ -44,8 +44,8 @@ if ($connect) {
             $toReturn1['phone'] = $order['orderer_phone'];
 
             $toDeliverTime = explode(' ', $order['to_deliver_time']);
-
-            $toReturn1['date_and_time_start'] = $toDeliverTime[1] . "   " . $toDeliverTime[0];
+            
+            $toReturn1['date_and_time_start'] = $toDeliverTime[1]."   ".$toDeliverTime[0];
             $toReturn1['date_and_time_end'] = $order['to_deliver_time'];
             $toReturn1['qrCodeValue'] = $order['qr_code_issue_tracking_no'];
             $orderID = $toReturn1['id'];
@@ -71,7 +71,7 @@ if ($connect) {
                 $totalPrice = $totalPrice + $tableOrder['price'];
                 array_push($bills, $order2);
             }
-
+            
             $toReturn1['status'] = $order['status'];
             $toReturn1['totalPrice'] = $totalPrice;
             $toReturn1['specifiedBills'] = $bills;
@@ -84,3 +84,4 @@ if ($connect) {
         die('Unauthorized !');
     }
 }
+?>

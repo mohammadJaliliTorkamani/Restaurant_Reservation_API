@@ -3,9 +3,9 @@ require_once('../UserValidator.php');
 require_once('../PersianDate.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 date_default_timezone_set("Asia/Tehran");
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
@@ -32,7 +32,8 @@ if ($connect) {
         $openForServeCheckerQuery = "SELECT ready_for_serve as ready FROM Restaurant WHERE id = '$restaurantID'";
         $openForServeCheckerResult = mysqli_query($connect, $openForServeCheckerQuery);
         $readyForServe = mysqli_fetch_assoc($openForServeCheckerResult)['ready'];
-        $response['manuallyDisabled'] = !($readyForServe == 1);
+        $response['manuallyDisabled']=!($readyForServe == 1);
         die(json_encode($response));
     }
 }
+?>

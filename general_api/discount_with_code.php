@@ -2,9 +2,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 if ($connect) {
@@ -47,3 +47,4 @@ if ($connect) {
         die(json_encode($discount));
     }
 }
+?>

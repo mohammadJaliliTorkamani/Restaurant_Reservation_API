@@ -1,9 +1,9 @@
 <?php
 require_once('../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 date_default_timezone_set("Asia/Tehran");
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
@@ -37,6 +37,7 @@ if ($connect) {
                 $response['resultCode'] = 100;
                 $response['message'] = 'رمز خود را اشتباه وارد کرده اید !';
             }
+
         } else {
             $response['resultCode'] = 100;
             $response['message'] = 'چنین کاربری وجود ندارد !';
@@ -44,3 +45,4 @@ if ($connect) {
     }
     die(json_encode($response));
 }
+?>

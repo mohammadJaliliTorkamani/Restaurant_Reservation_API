@@ -4,9 +4,9 @@ date_default_timezone_set("Asia/Tehran");
 require_once('../UserValidator.php');
 require_once('../../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_adminDatabase');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_AbanDatabase');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 if ($connect) {
@@ -33,7 +33,7 @@ if ($connect) {
                 $response['resultCode'] = 100;
                 $response['message'] = "سفارش موجود نیست";
             }
-        } else if ($status == "discarded") { //make order to discard status
+        } else if ($status == "discarded") {//make order to discard status
             $checkOrderExistenceQuery = "SELECT LexinOrder.id FROM LexinOrder WHERE LexinOrder.restaurant_id = '$restaurantID' AND LexinOrder.status= 'In Queue' AND LexinOrder.id = '$orderID'";
             $checkOrderExistenceRes = mysqli_query($connect, $checkOrderExistenceQuery);
             if (mysqli_num_rows($checkOrderExistenceRes) > 0) {
@@ -53,3 +53,4 @@ if ($connect) {
         die('Unauthorized !');
     }
 }
+?>

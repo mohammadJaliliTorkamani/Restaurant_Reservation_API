@@ -2,9 +2,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 date_default_timezone_set("Asia/Tehran");
 
@@ -41,7 +41,7 @@ if ($connect) {
             $row_array['topChairID'] = $row['top_chair_id'];
             $row_array['bottomChairID'] = $row['bottom_chair_id'];
             $row_array['startChairID'] = $row['start_chair_id'];
-            $row_array['endChairID'] = $row['end_chair_id'];
+            $row_array['endChairID'] = $row ['end_chair_id'];
             $row_array['row_index'] = $row['row_index'];
             $row_array['column_index'] = $row['column_index'];
             $row_array['previousDeskID'] = $row['previous_desk_id'];
@@ -68,3 +68,5 @@ if ($connect) {
         die(json_encode($return_arr));
     }
 }
+?>
+

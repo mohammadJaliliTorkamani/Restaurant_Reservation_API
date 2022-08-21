@@ -2,9 +2,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 mysqli_set_charset($connect, "utf8");
@@ -35,10 +35,11 @@ if ($connect) {
         $row_array['name'] = $cipher->encrypt($row['name']);
         $row_array['calories'] = $row['calorie'];
         $row_array['cookTimeMinutes'] = $row['cook_time_minutes'];
-        $row_array['description'] = $cipher->encrypt($row['description']);
+        $row_array['description'] = $cipher->encrypt($row ['description']);
         $row_array['price'] = $row['price'];
         array_push($photos, $cipher->encrypt($row['one']));
         $row_array['pictures'] = $photos;
         die(json_encode($row_array));
     }
 }
+?>

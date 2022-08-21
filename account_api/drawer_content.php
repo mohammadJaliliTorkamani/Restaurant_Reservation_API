@@ -3,9 +3,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 define("ENCRYPTION_KEY", "!@#$%^&*");
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
@@ -24,7 +24,7 @@ if ($connect) {
     mysqli_query($connect, 'SET CHARACTER SET utf8');
     $userValidator = new UserValidator($token);
     if ($userValidator->isValidUser()) {
-        $userID = $userValidator->getUserID();
+        $userID=$userValidator->getUserID();
         $query = "SELECT name,last_name,cash FROM NormalUser WHERE id = '$userID'";
         $res = mysqli_fetch_assoc(mysqli_query($connect, $query));
         try {
@@ -37,3 +37,4 @@ if ($connect) {
         die(json_encode($toReturn));
     }
 }
+?>

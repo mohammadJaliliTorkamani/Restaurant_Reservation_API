@@ -2,9 +2,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 mysqli_set_charset($connect, "utf8");
@@ -19,18 +19,15 @@ if ($connect) {
             $token = $val;
         else if (strcmp($key, "Encsharedkey") == 0)
             $sharedKey = $val;
-        else if (strcmp($key, "Code") == 0)
-            $code = $val;
     }
 
     $qrCode = $_GET['qrCode'];
     $UserValidator = new UserValidator($token);
     if ($UserValidator->isValidUser()) {
         $cipher = new MCrypt($sharedKey);
-        $restaurantID = $cipher->getRestaurantID($code);
-        $query = "SELECT Gallery.one,Restaurant.id,Restaurant.name,Address.id as address_id,Address.latitude,Address.longitude,Address.country,Address.state,Address.city,Address.street1,Address.street2,Address.alley1,Address.alley2,Address.block,Address.floor,Address.unit,Address.orientation,RestaurantType.name as type,Restaurant.phone FROM Restaurant,RestaurantType,Address,Gallery WHERE Restaurant.id = '$restaurantID' AND Restaurant.type_id =RestaurantType.id AND Restaurant.address_id = Address.id AND Restaurant.pictures_id = Gallery.id";
+        $query = "SELECT Gallery.one,Restaurant.id,Restaurant.name,Address.id as address_id,Address.latitude,Address.longitude,Address.country,Address.state,Address.city,Address.street1,Address.street2,Address.alley1,Address.alley2,Address.block,Address.floor,Address.unit,Address.orientation,RestaurantType.name as type,Restaurant.phone FROM Restaurant,RestaurantType,Address,Gallery,QrCode WHERE Restaurant.id = QrCode.restaurant_id AND QrCode.qr_code = '$qrCode' AND Restaurant.type_id =RestaurantType.id AND Restaurant.address_id = Address.id AND Restaurant.pictures_id = Gallery.id";
         $qRes = mysqli_query($connect, $query);
-        if (mysqli_num_rows($qRes) > 0) {
+        if(mysqli_num_rows($qRes)>0){
             $res = mysqli_fetch_assoc($qRes);
             $item['id'] = $res['id'];
             $item['type'] = $cipher->encrypt($res['type']);
@@ -50,7 +47,7 @@ if ($connect) {
             $address['latitude'] = $res['latitude'];
             $address['longitude'] = $res['longitude'];
             $address['orientation'] = $cipher->encrypt($res['orientation']);
-
+            
             $item['address'] = $address;
             $pictures = [];
             array_push($pictures, $res['one']);
@@ -59,3 +56,4 @@ if ($connect) {
         die(json_encode($item));
     }
 }
+?>

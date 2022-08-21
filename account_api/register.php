@@ -1,9 +1,9 @@
 <?php
 require_once('../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 date_default_timezone_set("Asia/Tehran");
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
@@ -33,9 +33,9 @@ if ($connect) {
     $checkCodeQueryRes = mysqli_query($connect, $checkCodeQuery);
     if (mysqli_num_rows($checkCodeQueryRes) > 0) {
         $fResult = mysqli_fetch_assoc($checkCodeQueryRes);
-        $equality = false;
+        $equality=false;
         if ($code == $fResult['code']);
-        $equality = true;
+            $equality = true;
     } else {
         $response['resultCode'] = 1;
         $response['message'] = 'خطای فنی در سیستم';
@@ -58,3 +58,4 @@ if ($connect) {
     }
     die(json_encode($response));
 }
+?>

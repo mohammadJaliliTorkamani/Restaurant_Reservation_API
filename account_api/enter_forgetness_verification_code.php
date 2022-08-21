@@ -1,8 +1,8 @@
 <?php
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 
@@ -13,6 +13,7 @@ if ($connect) {
     foreach ($headers as $key => $val) {
         if (strcmp($key, "Pusheid") == 0)
             $pusheID = $val;
+
     }
     $code = $_POST['code'];
     $query = "SELECT activationCode as code FROM ActivationCode WHERE pusheID = '$pusheID' ORDER BY id desc";
@@ -21,7 +22,7 @@ if ($connect) {
         $fResult = mysqli_fetch_assoc($res)['code'];
         if ($fResult == $code) {
             $response['code'] = 101;
-            mysqli_query($connect, "DELETE FROM ActivationCode WHERE pusheID = '$pusheID'");
+            mysqli_query($connect,"DELETE FROM ActivationCode WHERE pusheID = '$pusheID'");
         } else {
             $response['code'] = 102;
             $response['message'] = 'کد وارد شده اشتباه می باشد';
@@ -32,3 +33,4 @@ if ($connect) {
     }
     die(json_encode($response));
 }
+?>

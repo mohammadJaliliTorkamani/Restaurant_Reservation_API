@@ -4,14 +4,14 @@ date_default_timezone_set("Asia/Tehran");
 require_once('../UserValidator.php');
 require_once('../../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_adminDatabase');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_AbanDatabase');
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 
 if ($connect) {
     $code = $_GET['code'];
-    $submitToAdd = $_GET['submit_to_add']; //if be true means add,if false means delete
+    $submitToAdd = $_GET['submit_to_add'];//if be true means add,if false means delete
     $percentage = $_GET['percentage'];
     $maxUsage = $_GET['max_usage'];
     $minAcceptable = $_GET['min_acceptable'];
@@ -32,7 +32,7 @@ if ($connect) {
                 $response['resultCode'] = 100;
                 $response['message'] = "کد تخفیف وارد شده موجود است";
             }
-        } else { //we wanna delete such discount code
+        } else {//we wanna delete such discount code
             $selectDiscountQuery = "SELECT * FROM Discount WHERE code = '$code' AND restaurant_id = '$restaurantID' AND is_valid='1'";
             $selectDiscounRes = mysqli_query($connect, $selectDiscountQuery);
             if (mysqli_num_rows($selectDiscounRes) > 0) {
@@ -49,3 +49,4 @@ if ($connect) {
         die('Unauthorized !');
     }
 }
+?>

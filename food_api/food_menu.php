@@ -1,8 +1,8 @@
 <?php
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 
@@ -54,7 +54,7 @@ if ($connect) {
                 $row_array['name'] = $cipher->encrypt($row['name']);
                 $row_array['calories'] = $row['calories'];
                 $row_array['cookTimeMinutes'] = $row['cook_time_minutes'];
-                $row_array['description'] = $cipher->encrypt($row['description']);
+                $row_array['description'] = $cipher->encrypt($row ['description']);
                 $row_array['price'] = $row['price'];
                 array_push($photos, $cipher->encrypt($row['one']));
                 $row_array['pictures'] = $photos;
@@ -67,3 +67,5 @@ if ($connect) {
         die(json_encode($final_return_arr));
     }
 }
+?>
+

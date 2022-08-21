@@ -3,9 +3,9 @@ require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 require_once('../PersianDate.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 mysqli_set_charset($connect, "utf8");
@@ -27,7 +27,7 @@ if ($connect) {
         $refID = $cypher->decrypt($_GET["ref_id"]);
         $updateCashQueryResult = mysqli_query($connect, "UPDATE NormalUser SET cash = cash+'$amount' WHERE id = '$user_id'");
         $newCashResult = mysqli_query($connect, "SELECT cash FROM NormalUser WHERE id = '$user_id'");
-        $newCash = mysqli_fetch_assoc($newCashResult)["cash"];
+        $newCash = mysqli_fetch_assoc($newCashResult) ["cash"];
         $persianDate = new gregorian2jalali();
         $dateTime = $persianDate->gregorian_to_jalali() . " " . date("H:i:s");
         $query = "INSERT INTO CashCharge(user_id,user_role,amount,new_inventory,bank_issue_tracking_no,creation_time) VALUES ('$user_id','normal','$amount','$newCash','$refID','$dateTime')";
@@ -37,3 +37,4 @@ if ($connect) {
         die(json_encode($response));
     }
 }
+?> 

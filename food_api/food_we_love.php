@@ -2,9 +2,9 @@
 require_once('../UserValidator.php');
 require_once('../MCrypt.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'lexeense_admin');
-define('PASSWORD', 'admin@lexeen123_#');
-define('DATABASE', 'lexeense_Main_DB');
+define('USERNAME', 'cpres873_Aban');
+define('PASSWORD', 'KimiaAndMohammad');
+define('DATABASE', 'cpres873_KNTU_Database');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 mysqli_set_charset($connect, "utf8");
@@ -23,10 +23,10 @@ if ($connect) {
     }
     $UserValidator = new UserValidator($token);
     if ($UserValidator->isValidUser()) {
-        $cipher = new MCrypt($sharedKey);
+        $cipher=new MCrypt($sharedKey);
         $restaurantID = $cipher->getRestaurantID($qrCode);
         $query = "SELECT PopularFood.id as id,PopularFood.food_id,PopularFood.priority FROM PopularFood,Food WHERE PopularFood.food_id = Food.id  AND Food.restaurant_id = '$restaurantID' AND Food.deleted='0' AND Food.valid_to_cook='1'";
-
+        
         $res = mysqli_query($connect, $query);
         $return_arr = [];
         while ($row = mysqli_fetch_assoc($res)) {
@@ -38,3 +38,4 @@ if ($connect) {
         die(json_encode($return_arr));
     }
 }
+?>

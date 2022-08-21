@@ -1,39 +1,61 @@
-<?php
+                            <?php
 
 /**
  * UltraFastSend File Restful API PHP Sample Codes
- *
+ * 
  * PHP version 5.6.23 | 7.2.12
- *
+ * 
  * @category  PHPSampleCodes
  * @package   SampleCodes
  * @author    Pejman Kheyri <pejmankheyri@gmail.com>
  * @copyright 2018 The Ide Pardazan (ipe.ir) PHP Group. All rights reserved.
  * @license   https://sms.ir/ ipe license
+
  * @version   IPE: 2.0
  * @link      https://sms.ir/ Documentation of sms.ir Restful API PHP Sample Codes.
  */
 
 /**
  * UltraFastSend Class Restful API PHP Sample Codes
- *
+ * 
  * @category  PHPSampleCodesClass
  * @package   SampleCodesClass
  * @author    Pejman Kheyri <pejmankheyri@gmail.com>
  * @copyright 2018 The Ide Pardazan (ipe.ir) PHP Group. All rights reserved.
  * @license   https://sms.ir/ ipe license
- * @link      https://sms.ir/ Documentation of sms.ir
+ * @link      https://sms.ir/ Documentation of sms.ir 
  */
+
 class SmsSender
 {
 
     /**
+     * Gets API Ultra Fast Send Url.
+     *
+     * @return string Indicates the Url
+     */
+    protected function getAPIUltraFastSendUrl() 
+    {
+        return "api/UltraFastSend";
+    }
+
+    /**
+     * Gets Api Token Url.
+     *
+     * @return string Indicates the Url
+     */
+    protected function getApiTokenUrl()
+    {
+        return "api/Token";
+    }
+
+    /**
      * Gets config parameters for sending request.
      *
-     * @param string $APIKey API Key
+     * @param string $APIKey    API Key
      * @param string $SecretKey Secret Key
-     * @param string $APIURL API URL
-     *
+     * @param string $APIURL    API URL
+     * 
      * @return void
      */
     public function __construct($APIKey, $SecretKey, $APIURL)
@@ -47,16 +69,16 @@ class SmsSender
      * Ultra Fast Send Message.
      *
      * @param data[] $data array structure of message data
-     *
+     * 
      * @return string Indicates the sent sms result
      */
-    public function ultraFastSend($data)
+    public function ultraFastSend($data) 
     {
         $token = $this->_getToken($this->APIKey, $this->SecretKey);
         if ($token != false) {
             $postData = $data;
 
-            $url = $this->APIURL . $this->getAPIUltraFastSendUrl();
+            $url = $this->APIURL.$this->getAPIUltraFastSendUrl();
             $UltraFastSend = $this->_execute($postData, $url, $token);
 
             $object = json_decode($UltraFastSend);
@@ -88,7 +110,7 @@ class SmsSender
         );
         $postString = json_encode($postData);
 
-        $ch = curl_init($this->APIURL . $this->getApiTokenUrl());
+        $ch = curl_init($this->APIURL.$this->getApiTokenUrl());
         curl_setopt(
             $ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json'
@@ -123,32 +145,12 @@ class SmsSender
     }
 
     /**
-     * Gets Api Token Url.
-     *
-     * @return string Indicates the Url
-     */
-    protected function getApiTokenUrl()
-    {
-        return "api/Token";
-    }
-
-    /**
-     * Gets API Ultra Fast Send Url.
-     *
-     * @return string Indicates the Url
-     */
-    protected function getAPIUltraFastSendUrl()
-    {
-        return "api/UltraFastSend";
-    }
-
-    /**
      * Executes the main method.
      *
      * @param postData[] $postData array of json data
-     * @param string $url url
-     * @param string $token token string
-     *
+     * @param string     $url      url
+     * @param string     $token    token string
+     * 
      * @return string Indicates the curl execute result
      */
     private function _execute($postData, $url, $token)
@@ -159,7 +161,7 @@ class SmsSender
         curl_setopt(
             $ch, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
-                'x-sms-ir-secure-token: ' . $token
+                'x-sms-ir-secure-token: '.$token
             )
         );
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -173,5 +175,4 @@ class SmsSender
         return $result;
     }
 }
-
-?>
+?> 

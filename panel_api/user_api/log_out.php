@@ -1,6 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin: *'); //allow everybody
 require_once('../UserValidator.php');
-require_once('../PersianDate.php');
+require_once('../../PersianDate.php');
 define('HOSTNAME', 'localhost');
 define('USERNAME', 'cpres873_Aban');
 define('PASSWORD', 'KimiaAndMohammad');
@@ -11,11 +12,7 @@ date_default_timezone_set('Asia/Tehran');
 if ($connect) {
     $token = null;
     $headers = getallheaders();
-    foreach ($headers as $key => $val) {
-        if (strcmp($key, "Token") == 0)
-            $token = $val;
-
-    }
+    $token=$_POST['Token'];
     $response = [];
     $UserValidator = new UserValidator($token);
     if ($UserValidator->isValidUser()) {
@@ -24,7 +21,7 @@ if ($connect) {
         $dateTime = (new gregorian2jalali)->gregorian_to_jalali() . " " . date('H:i:s');
         $query = "INSERT INTO LogOut (token_id,date_time) VALUES('$tokenID','$dateTime')";
         mysqli_query($connect, $query);
-        $response['code'] = 101;
+        $response['code'] = 200;
         mysqli_query($connect, "UPDATE Token SET deleted = '1' WHERE value = '$token'");
         die(json_encode($response));
     }
