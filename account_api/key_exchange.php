@@ -1,9 +1,9 @@
 <?php
 require_once("../UserValidator.php");
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_KNTU_Database');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_Main_DB');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 if ($connect) {
@@ -25,8 +25,7 @@ if ($connect) {
         $y = pow($G, $server_private_key) % $Prime;
         $shared_key = pow($x, $server_private_key) % $Prime;
         mysqli_query($connect, "UPDATE Token SET shared_key = '$shared_key' WHERE value = '$token' AND deleted = '0'");
-        echo($y); //becasue of 'long' type, we need to echo without EOF
+        echo ($y); //becasue of 'long' type, we need to echo without EOF
         die();
     }
 }
-?>

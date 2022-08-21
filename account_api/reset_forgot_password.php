@@ -1,8 +1,8 @@
 <?php
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_KNTU_Database');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_Main_DB');
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 
 if ($connect) {
@@ -14,4 +14,3 @@ if ($connect) {
     $response['code'] = 101;
     die(json_encode($response));
 }
-?>

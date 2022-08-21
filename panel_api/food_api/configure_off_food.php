@@ -3,9 +3,9 @@ header('Access-Control-Allow-Origin: *'); //allow everybody
 date_default_timezone_set("Asia/Tehran");
 require_once('../UserValidator.php');
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_AbanDatabase');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_adminDatabase');
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 if ($connect) {
     $foodID = $_GET['food_id'];
@@ -42,7 +42,7 @@ if ($connect) {
                 $response['resultCode'] = 100;
                 $response['message'] = "این تخفیف برای این غذا از قبل ثبت شده است.";
             }
-        } else {//we wanna delete a relation
+        } else { //we wanna delete a relation
             $selectOffFoodQuery = "SELECT * FROM RelFoodOff WHERE food_id = '$foodID' AND off_id = '$offID'";
             $selectOffFoodRes = mysqli_query($connect, $selectOffFoodQuery);
             if (mysqli_num_rows($selectOffFoodRes) > 0) {
@@ -73,4 +73,3 @@ if ($connect) {
         die('Unauthorized !');
     }
 }
-?>

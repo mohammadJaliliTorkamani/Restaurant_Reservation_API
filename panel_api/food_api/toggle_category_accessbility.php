@@ -1,15 +1,15 @@
 <?php
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_AbanDatabase');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_adminDatabase');
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 if ($connect) {
     mysqli_set_charset($connect, "utf8");
     date_default_timezone_set("Asia/Tehran");
     $categoryID = $_GET['category_id'];
     $restaurantID = $_GET['restaurant_id'];
-    $enable = $_GET['submit_to_enable'];//if be true means enalbe(or if not exist,add),if false means disable
+    $enable = $_GET['submit_to_enable']; //if be true means enalbe(or if not exist,add),if false means disable
     $token = null;
     $headers = getallheaders();
     foreach ($headers as $key => $val) {
@@ -25,10 +25,10 @@ if ($connect) {
             if (mysqli_num_rows($checkRelationExistenceRes) > 0) {
                 $checkValidityQuery = "SELECT * FROM RelCategoryRestaurant WHERE restaurant_id = '$restaurantID' AND category_id = '$categoryID' AND is_valid='1'";
                 $checkValidityRes = mysqli_query($connect, $checkValidityQuery);
-                if (mysqli_num_rows($checkValidityRes) > 0) {//it's done before !
+                if (mysqli_num_rows($checkValidityRes) > 0) { //it's done before !
                     $response['resultCode'] = 100;
                     $response['message'] = "از قبل موجود است";
-                } else {//enable it
+                } else { //enable it
                     mysqli_query($connect, "UPDATE RelCategoryRestaurant SET is_valid='1' WHERE restaurant_id = '$restaurantID' AND category_id = '$categoryID'");
                     $response['resultCode'] = 200;
                     $response['message'] = "موفق";
@@ -38,16 +38,16 @@ if ($connect) {
                 $response['resultCode'] = 200;
                 $response['message'] = "موفق";
             }
-        } else {//disable such relation
+        } else { //disable such relation
             $checkRelationExistenceQuery = "SELECT * FROM RelCategoryRestaurant WHERE restaurant_id = '$restaurantID' AND category_id = '$categoryID'";
             $checkRelationExistenceRes = mysqli_query($connect, $checkRelationExistenceQuery);
             if (mysqli_num_rows($checkRelationExistenceRes) > 0) {
                 $checkInvalidityQuery = "SELECT * FROM RelCategoryRestaurant WHERE restaurant_id = '$restaurantID' AND category_id = '$categoryID' AND is_valid='0'";
                 $checkInvalidityRes = mysqli_query($connect, $checkInvalidityQuery);
-                if (mysqli_num_rows($checkInvalidityRes) > 0) {//it's done before !
+                if (mysqli_num_rows($checkInvalidityRes) > 0) { //it's done before !
                     $response['resultCode'] = 100;
                     $response['message'] = "از قبل موجود است";
-                } else {//disable it
+                } else { //disable it
                     mysqli_query($connect, "UPDATE RelCategoryRestaurant SET is_valid='0' WHERE restaurant_id = '$restaurantID' AND category_id = '$categoryID'");
                     $response['resultCode'] = 200;
                     $response['message'] = "موفق";
@@ -62,4 +62,3 @@ if ($connect) {
         die('Unauthorized !');
     }
 }
-?>

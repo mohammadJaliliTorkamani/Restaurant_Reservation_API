@@ -2,9 +2,9 @@
 require_once("../SMSSender.php");
 require_once("../PersianDate.php");
 define('HOSTNAME', 'localhost');
-define('USERNAME', 'cpres873_Aban');
-define('PASSWORD', 'KimiaAndMohammad');
-define('DATABASE', 'cpres873_KNTU_Database');
+define('USERNAME', 'lexeense_admin');
+define('PASSWORD', 'admin@lexeen123_#');
+define('DATABASE', 'lexeense_Main_DB');
 
 $connect = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE) or die('Unable to Connect');
 date_default_timezone_set("Asia/Tehran");
@@ -34,9 +34,10 @@ if ($connect) {
             $SecretKey = "Mohammad_Kimia_1376_1377";
             $APIURL = "https://ws.sms.ir/";
             // message data
-            $data = array("ParameterArray" => array(
-                array("Parameter" => "VerificationCode", "ParameterValue" => $actCode)
-            ),
+            $data = array(
+                "ParameterArray" => array(
+                    array("Parameter" => "VerificationCode", "ParameterValue" => $actCode)
+                ),
                 "Mobile" => "0" . substr($phone, 4),
                 "TemplateId" => "18002"
             );
@@ -57,4 +58,3 @@ if ($connect) {
 }
 
 die(json_encode($response));
-?>
